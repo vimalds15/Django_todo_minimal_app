@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <title>To Do App</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{% static 'todo/styles.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="heading">
+            <h1>TO-DO APP</h1>
+        </div>
+ 
+        <UL> 
+            {% for items in all_items %}
+              <li>{{items}}
+                <form action="/delTodo/{{items.id}}" style="display: inline;" method="POST"> 
+                    {% csrf_token %}
+                <input type="submit" value="Delete"/>
+                </form>
+            </li>
+            {% endfor %}
+        </UL>
+
+        <form action="/addTodo/" method="POST">
+            {% csrf_token %}
+        <input type="text" name="content"/>
+        <input type="submit" value="Add"/>
+
+
+        </form>
+    </body>
+</html>
